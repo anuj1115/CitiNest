@@ -131,9 +131,9 @@ function Profile() {
         <button disabled={loading} className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>
            {loading ? "updating...":"Update"}
         </button>
-        <button className='bg-green-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>
-           CREATE LISTING
-        </button>
+        <Link className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95" to={"/create-listing"}>
+          Create Listing
+        </Link>
       </form>
       <div className='flex flex-row justify-between items-center'>
           <Link to={"/sign-in"}>
