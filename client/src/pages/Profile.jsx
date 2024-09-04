@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import {useEffect, useRef, useState} from 'react'
 import {getDownloadURL, getStorage, ref, uploadBytesResumable} from "firebase/storage"
 import { app } from "../firebase"
-import { updateUserStart, updateUserSuccess, updateUserFailure } from "../redux/user/userSlice"
+import { updateUserStart, updateUserSuccess, updateUserFailure, deleteUserFailure, deleteUserStart, deleteUserSuccess } from "../redux/user/userSlice"
 import { useDispatch } from "react-redux"
 
 function Profile() {
@@ -46,7 +46,7 @@ function Profile() {
     );
   }
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     setFormData({...formData, [e.target.id]: e.target.value })
   }
 
@@ -76,6 +76,23 @@ function Profile() {
     }
   }
 
+  const handleDeleteUser = async (e) => {
+    try {
+      dispatch(deleteUserStart())
+      const res = await fetch(`/api/user/delete/${currentUser._id}`,{
+        method: 'DELETE',
+      })
+      const data = await res.json()
+      if(data.success === false) {
+        dispatch(deleteUserFailure(data.message))
+      }
+      dispatch(deleteUserSuccess(data))
+      
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message))
+    }
+  }
+
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
@@ -95,23 +112,22 @@ function Profile() {
         </p>
         <input onChange={handleChange} defaultValue={currentUser.username} type='text' placeholder='Username' className='border p-3 rounded-lg' id='username' />
         <input onChange={handleChange} defaultValue={currentUser.email} type='text' placeholder='Email' className='border p-3 rounded-lg' id='email'/>
-        <input type='password' placeholder='Password' className='border p-3 rounded-lg' id='password'/>
+        <input onChange={handleChange} type='password' placeholder='Password' className='border p-3 rounded-lg' id='password'/>
         <button disabled={loading} className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>
-           {loading ? "loading...":"Update"}
+           {loading ? "updating...":"Update"}
         </button>
         <button className='bg-green-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>
            CREATE LISTING
         </button>
       </form>
       <div className='flex flex-row justify-between items-center'>
-          <Link to={"/"}>
-            <span className='text-red-700 text-[15px]'>Delete Account</span>
+          <Link to={"/sign-in"}>
+            <span onClick={handleDeleteUser} className='text-red-700 text-[15px]'>Delete Account</span>
           </Link>
           <Link to={"/"}>
             <span className='text-red-700 text-[15px]'>Sign out</span>
           </Link>
       </div>
-      <p className="text-red-700 mt-5">{error ? error : ''}</p>
       <p className="text-green-700 mt-5">{updateSuccess ? 'User is updated successfully!' : ''}</p>
 
       <div className="flex flex-row justify-center items-center mt-4">
