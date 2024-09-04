@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import {useEffect, useRef, useState} from 'react'
 import {getDownloadURL, getStorage, ref, uploadBytesResumable} from "firebase/storage"
 import { app } from "../firebase"
-import { updateUserStart, updateUserSuccess, updateUserFailure, deleteUserFailure, deleteUserStart, deleteUserSuccess } from "../redux/user/userSlice"
+import { updateUserStart, updateUserSuccess, updateUserFailure, deleteUserFailure, deleteUserStart, deleteUserSuccess, signoutUserStart, signoutUserFailure, signoutUserSuccess } from "../redux/user/userSlice"
 import { useDispatch } from "react-redux"
 
 function Profile() {
@@ -93,6 +93,21 @@ function Profile() {
     }
   }
 
+  const handleSignout = async (e) => {
+    try {
+      dispatch(signoutUserStart())
+      const res = await fetch('/api/auth/signout')
+      const data = await res.json()
+      if(data.success === false) {
+        dispatch(signoutUserFailure(data.message))
+        return
+      }
+      dispatch(signoutUserSuccess(data))
+    } catch (error) {
+      dispatch(signoutUserFailure(data.message))
+    }
+  }
+
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
@@ -124,8 +139,8 @@ function Profile() {
           <Link to={"/sign-in"}>
             <span onClick={handleDeleteUser} className='text-red-700 text-[15px]'>Delete Account</span>
           </Link>
-          <Link to={"/"}>
-            <span className='text-red-700 text-[15px]'>Sign out</span>
+          <Link to={"/sign-in"}>
+            <span onClick={handleSignout} className='text-red-700 text-[15px]'>Sign out</span>
           </Link>
       </div>
       <p className="text-green-700 mt-5">{updateSuccess ? 'User is updated successfully!' : ''}</p>
