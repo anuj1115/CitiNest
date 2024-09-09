@@ -5,6 +5,7 @@ import {getDownloadURL, getStorage, ref, uploadBytesResumable} from "firebase/st
 import { app } from "../firebase"
 import { updateUserStart, updateUserSuccess, updateUserFailure, deleteUserFailure, deleteUserStart, deleteUserSuccess, signoutUserStart, signoutUserFailure, signoutUserSuccess } from "../redux/user/userSlice"
 import { useDispatch } from "react-redux"
+import Footer from "../components/Footer"
 
 function Profile() {
   const {currentUser, loading, error} = useSelector(state => state.user)
@@ -144,6 +145,7 @@ function Profile() {
   };
 
   return (
+    <>
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 mb-4">
@@ -207,6 +209,10 @@ function Profile() {
          </div>
         }
     </div>
+    <div>
+      <Footer/>
+    </div>
+   </>
   )
 }
 
