@@ -108,7 +108,7 @@ export default function Home() {
                 Show more offers
               </Link>
             </div>
-            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 flex-wrap gap-4'>
               {offerListings.map((listing) => (
                 <ListingItem listing={listing} key={listing._id} />
               ))}
@@ -130,7 +130,7 @@ export default function Home() {
                 Show more places for rent
               </Link>
             </div>
-            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 flex-wrap gap-6'>
               {rentListings.map((listing) => (
                 <ListingItem listing={listing} key={listing._id} />
               ))}
@@ -152,7 +152,7 @@ export default function Home() {
                 Show more places for sale
               </Link>
             </div>
-            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 flex-wrap gap-6'>
               {saleListings.map((listing) => (
                 <ListingItem listing={listing} key={listing._id} />
               ))}
