@@ -127,9 +127,10 @@ export default function Search() {
     }
     setListings([...listings, ...data]);
   };
+
   return (
-    <div className='flex flex-col md:flex-row'>
-      <div className='p-7  border-b-2 md:border-r-2 md:min-h-screen'>
+    <div className='flex flex-col md:flex-row bg-gray-100 mt-20'>
+      <div className='p-7 border-b-2 md:border-r-2 md:min-h-screen bg-white shadow-lg'>
         <form onSubmit={handleSubmit} className='flex flex-col gap-8'>
           <div className='flex items-center gap-2'>
             <label className='whitespace-nowrap font-semibold'>
@@ -139,7 +140,7 @@ export default function Search() {
               type='text'
               id='searchTerm'
               placeholder='Search...'
-              className='border rounded-lg p-3 w-full'
+              className='border rounded-lg p-3 w-full focus:ring-2 focus:ring-teal-400'
               value={sidebardata.searchTerm}
               onChange={handleChange}
             />
@@ -150,7 +151,7 @@ export default function Search() {
               <input
                 type='checkbox'
                 id='all'
-                className='w-5'
+                className='w-5 accent-teal-600'
                 onChange={handleChange}
                 checked={sidebardata.type === 'all'}
               />
@@ -160,7 +161,7 @@ export default function Search() {
               <input
                 type='checkbox'
                 id='rent'
-                className='w-5'
+                className='w-5 accent-teal-600'
                 onChange={handleChange}
                 checked={sidebardata.type === 'rent'}
               />
@@ -170,7 +171,7 @@ export default function Search() {
               <input
                 type='checkbox'
                 id='sale'
-                className='w-5'
+                className='w-5 accent-teal-600'
                 onChange={handleChange}
                 checked={sidebardata.type === 'sale'}
               />
@@ -180,7 +181,7 @@ export default function Search() {
               <input
                 type='checkbox'
                 id='offer'
-                className='w-5'
+                className='w-5 accent-teal-600'
                 onChange={handleChange}
                 checked={sidebardata.offer}
               />
@@ -193,7 +194,7 @@ export default function Search() {
               <input
                 type='checkbox'
                 id='parking'
-                className='w-5'
+                className='w-5 accent-teal-600'
                 onChange={handleChange}
                 checked={sidebardata.parking}
               />
@@ -203,7 +204,7 @@ export default function Search() {
               <input
                 type='checkbox'
                 id='furnished'
-                className='w-5'
+                className='w-5 accent-teal-600'
                 onChange={handleChange}
                 checked={sidebardata.furnished}
               />
@@ -216,15 +217,15 @@ export default function Search() {
               onChange={handleChange}
               defaultValue={'created_at_desc'}
               id='sort_order'
-              className='border rounded-lg p-3'
+              className='border rounded-lg p-3 focus:ring-2 focus:ring-teal-400'
             >
               <option value='regularPrice_desc'>Price high to low</option>
-              <option value='regularPrice_asc'>Price low to hight</option>
+              <option value='regularPrice_asc'>Price low to high</option>
               <option value='createdAt_desc'>Latest</option>
               <option value='createdAt_asc'>Oldest</option>
             </select>
           </div>
-          <button className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95'>
+          <button className='bg-teal-600 text-white p-3 rounded-lg uppercase hover:opacity-90 transition'>
             Search
           </button>
         </form>
@@ -252,7 +253,7 @@ export default function Search() {
           {showMore && (
             <button
               onClick={onShowMoreClick}
-              className='text-green-700 hover:underline p-7 text-center w-full'
+              className='text-teal-700 hover:underline p-7 text-center w-full'
             >
               Show more
             </button>

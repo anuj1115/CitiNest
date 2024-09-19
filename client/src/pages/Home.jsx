@@ -53,7 +53,7 @@ export default function Home() {
     <div className='bg-gradient-to-b from-white via-gray-50 to-gray-100 mt-20'>
       <div className='flex flex-col gap-6 py-20 px-4 max-w-6xl mx-auto text-center'>
         <h1 className='text-slate-700 font-bold text-4xl lg:text-6xl'>
-          Find your next <span className='text-yellow-500'>Home</span>
+          Explore your perfect <span className='text-yellow-500'>Spot</span>
         </h1>
         <p className='text-gray-500 text-sm sm:text-lg'>
           Discover a wide range of properties with <span className='font-bold text-blue-800'>CitiNest</span> and make your dream home a reality.

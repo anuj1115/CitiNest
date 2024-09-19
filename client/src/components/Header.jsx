@@ -83,9 +83,9 @@ export default function Header() {
                 alt='profile'
               />
             ) : (
-              <li className='hover:underline cursor-pointer text-lg sm:text-base text-gray-700 hover:text-yellow-600 transition-all duration-300'>
+              <button className='px-4 py-2 bg-blue-900 rounded-md font-normal text-white'>
                 Sign in
-              </li>
+              </button>
             )}
           </Link>
         </ul>
